@@ -1,0 +1,3006 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CELC Systems - Professional IT & Automation Services for Hispanic Businesses in NYC & Long Island. PC Repair, n8n Automation, Business Workflows.">
+    <meta name="keywords" content="PC repair NYC, business automation, n8n, IT support Long Island, Hispanic business tech">
+    <title>CELC Systems | IT & Automation Services for NYC Hispanic Businesses</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --primary-light: #60a5fa;
+            --accent: #f97316;
+            --accent-light: #fb923c;
+            --bg-light: #f8fafc;
+            --bg-dark: #0f172a;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --text-muted: #94a3b8;
+            --border: rgba(255, 255, 255, 0.3);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 60px rgba(37, 99, 235, 0.2);
+            --glass: rgba(255, 255, 255, 0.1);
+            --gradient-1: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            --gradient-2: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="dark"] {
+            --bg-light: #0f172a;
+            --bg-dark: #f8fafc;
+            --bg-card: rgba(15, 23, 42, 0.85);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border: rgba(255, 255, 255, 0.1);
+            --glass: rgba(15, 23, 42, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        [data-theme="dark"] .navbar {
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        .navbar.scrolled {
+            padding: 0.75rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: var(--gradient-1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            width: 44px;
+            height: 44px;
+            border: none;
+            background: var(--glass);
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .theme-toggle:hover {
+            transform: rotate(15deg);
+            background: var(--primary-light);
+            color: white;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--glass);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 12px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .mobile-menu-btn span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 1.5rem 80px;
+            background: var(--bg-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .hero-gradient {
+            position: absolute;
+            width: 800px;
+            height: 800px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .hero-gradient-1 {
+            background: var(--gradient-1);
+            top: -200px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+
+        .hero-gradient-2 {
+            background: var(--gradient-2);
+            bottom: -200px;
+            left: -200px;
+            width: 600px;
+            height: 600px;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            opacity: 0.7;
+        }
+
+        .shape-1 {
+            width: 120px;
+            height: 120px;
+            top: 20%;
+            left: 10%;
+            animation: float-shape 8s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 80px;
+            height: 80px;
+            top: 60%;
+            right: 15%;
+            border-radius: 50%;
+            animation: float-shape 10s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 30%;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: float-shape 12s ease-in-out infinite;
+            animation-delay: -4s;
+        }
+
+        @keyframes float-shape {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            animation: slide-up 1s ease-out;
+        }
+
+        @keyframes slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero-title .typing-text {
+            color: var(--primary);
+            border-right: 3px solid var(--accent);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: var(--accent); }
+            51%, 100% { border-color: transparent; }
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-visual {
+            position: relative;
+            animation: slide-up 1s ease-out 0.2s both;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .hero-mockup {
+            background: var(--bg-card);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+        }
+
+        .mockup-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mockup-dots {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mockup-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .mockup-dot.red { background: #ef4444; }
+        .mockup-dot.yellow { background: #eab308; }
+        .mockup-dot.green { background: #22c55e; }
+
+        .mockup-search {
+            flex: 1;
+            padding: 0.5rem 1rem;
+            background: var(--bg-light);
+            border-radius: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .workflow-demo {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .workflow-node {
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+
+        .workflow-node:hover {
+            transform: translateX(10px);
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        }
+
+        .workflow-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .workflow-icon.blue { background: var(--primary); }
+        .workflow-icon.orange { background: var(--accent); }
+        .workflow-icon.purple { background: #9333ea; }
+
+        .workflow-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .workflow-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .workflow-arrow {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 4rem 1.5rem;
+            background: var(--bg-light);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 1.5rem;
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--gradient-1);
+            color: white;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .service-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-icon.blue {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+        }
+
+        .service-icon.orange {
+            background: rgba(249, 115, 22, 0.1);
+            color: var(--accent);
+        }
+
+        .service-icon.purple {
+            background: rgba(147, 51, 234, 0.1);
+            color: #9333ea;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-price span {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .service-features li i {
+            color: #22c55e;
+            font-size: 1rem;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 6rem 1.5rem;
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .process-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            text-align: center;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .process-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .process-number {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        .process-number::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 2px;
+            background: var(--primary-light);
+            right: -100px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .process-card:last-child .process-number::after {
+            display: none;
+        }
+
+        .process-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .process-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Portfolio Section */
+        .portfolio {
+            padding: 6rem 1.5rem;
+            background: var(--bg-light);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .portfolio-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .portfolio-image {
+            height: 240px;
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portfolio-image i {
+            font-size: 4rem;
+            color: white;
+            opacity: 0.9;
+        }
+
+        .portfolio-content {
+            padding: 2rem;
+        }
+
+        .portfolio-tag {
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.825rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .portfolio-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-stats {
+            display: flex;
+            gap: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .portfolio-stat {
+            text-align: center;
+        }
+
+        .portfolio-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .portfolio-stat-label {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 1.5rem;
+            background: var(--bg-light);
+            position: relative;
+        }
+
+        .testimonials-container {
+            max-width: 800px;
+            margin: 4rem auto 0;
+            position: relative;
+        }
+
+        .testimonial-slider {
+            overflow: hidden;
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-card {
+            min-width: 100%;
+            padding: 1rem;
+        }
+
+        .testimonial-content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+        }
+
+        .testimonial-quote {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            font-style: italic;
+        }
+
+        .testimonial-quote i {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .testimonial-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .testimonial-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-rating {
+            color: #fbbf24;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-btn {
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--border);
+            background: var(--bg-card);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .testimonial-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .testimonial-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Pricing Calculator Section */
+        .pricing {
+            padding: 6rem 1.5rem;
+            background: var(--bg-light);
+        }
+
+        .pricing-calculator {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            max-width: 800px;
+            margin: 4rem auto 0;
+            backdrop-filter: blur(20px);
+        }
+
+        .calculator-title {
+            text-align: center;
+            font-size: 1.75rem;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .calculator-option {
+            padding: 1.5rem;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            cursor: pointer;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .calculator-option:hover {
+            border-color: var(--primary-light);
+        }
+
+        .calculator-option.selected {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .calculator-option i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        .calculator-option h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .calculator-option p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .calculator-result {
+            background: var(--bg-light);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .price-display {
+            font-size: 3rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .price-display span {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .price-breakdown {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .price-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 1.5rem;
+            background: var(--bg-light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-card:hover {
+            transform: translateX(10px);
+            border-color: var(--primary);
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .contact-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-text p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .contact-form-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg-light);
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        /* Blog Section */
+        .blog {
+            padding: 6rem 0;
+            background: var(--light-bg);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .blog-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .blog-image i {
+            font-size: 3rem;
+            color: white;
+            opacity: 0.7;
+        }
+
+        .blog-category {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-meta i {
+            margin-right: 0.25rem;
+        }
+
+        .blog-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+
+        .blog-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: gap 0.3s ease;
+        }
+
+        .blog-link:hover {
+            gap: 0.75rem;
+        }
+
+        .blog-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .blog-link:hover i {
+            transform: translateX(4px);
+        }
+
+        .blog-cta {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Comparison Section */
+        .comparison {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .comparison-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .comparison-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .comparison-card.celecs {
+            background: rgba(249, 115, 22, 0.3);
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+
+        .comparison-card.celecs:hover {
+            transform: scale(1.08);
+        }
+
+        .competitor-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .comparison-card.celecs .competitor-logo {
+            color: var(--accent);
+        }
+
+        .competitor-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin: 1rem 0;
+        }
+
+        .competitor-price span {
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+
+        .price-note {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .comparison-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .comparison-features li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+        }
+
+        .comparison-features li:last-child {
+            border-bottom: none;
+        }
+
+        .comparison-features li.positive {
+            color: #86efac;
+        }
+
+        .comparison-features li.negative {
+            color: #fca5a5;
+            text-decoration: line-through;
+            opacity: 0.7;
+        }
+
+        .comparison-features i {
+            margin-right: 0.5rem;
+            width: 20px;
+            display: inline-block;
+        }
+
+        .savings-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            position: relative;
+        }
+
+        .lang-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lang-btn:hover {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        .lang-btn i {
+            font-size: 1rem;
+        }
+
+        .lang-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 0.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 0.5rem;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            min-width: 150px;
+        }
+
+        .language-switcher:hover .lang-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .lang-option:hover {
+            background: var(--bg-light);
+        }
+
+        .lang-option.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .lang-flag {
+            font-size: 1.25rem;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 4rem 1.5rem 2rem;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-secondary);
+            margin: 1rem 0;
+            line-height: 1.7;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-social a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .language-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .nav-actions .btn-secondary {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: flex;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-number::after {
+                display: none;
+            }
+
+            .calculator-options {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        /* Utility Classes */
+        .text-gradient {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .mt-4 { margin-top: 1rem; }
+        .mb-4 { margin-bottom: 1rem; }
+
+        /* Loading Spinner */
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(37, 99, 235, 0.2);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 9999;
+            backdrop-filter: blur(20px);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            border-left: 4px solid #22c55e;
+        }
+
+        .toast.error {
+            border-left: 4px solid #ef4444;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">C</div>
+                <span class="logo-text">CELC Systems</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#process">How It Works</a></li>
+                <li><a href="#portfolio">Case Studies</a></li>
+                <li><a href="#comparison">Comparación</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <a href="#contact" class="btn btn-secondary">Login</a>
+                <a href="#contact" class="btn btn-primary">Get Started</a>
+                <button class="mobile-menu-btn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-gradient hero-gradient-1"></div>
+            <div class="hero-gradient hero-gradient-2"></div>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    Serving NYC & Long Island Hispanic Businesses
+                </div>
+                <h1 class="hero-title">
+                    Tecnología Que <br>
+                    <span class="typing-text" id="typingText"></span>
+                </h1>
+                <p class="hero-description">
+                    Professional IT services and workflow automation designed specifically for small Hispanic businesses. From PC repair to complete business automation.
+                </p>
+                <div class="hero-cta">
+                    <a href="#contact" class="btn btn-primary btn-large">
+                        <i class="fas fa-rocket"></i>
+                        Start Your Project
+                    </a>
+                    <a href="#services" class="btn btn-secondary btn-large">
+                        <i class="fas fa-play-circle"></i>
+                        View Services
+                    </a>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="hero-mockup">
+                    <div class="mockup-header">
+                        <div class="mockup-dots">
+                            <div class="mockup-dot red"></div>
+                            <div class="mockup-dot yellow"></div>
+                            <div class="mockup-dot green"></div>
+                        </div>
+                        <div class="mockup-search">Automate Your Business...</div>
+                    </div>
+                    <div class="workflow-demo">
+                        <div class="workflow-node">
+                            <div class="workflow-icon blue">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="workflow-info">
+                                <h4>New Email Inquiry</h4>
+                                <p>Customer sends message</p>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="workflow-node">
+                            <div class="workflow-icon orange">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="workflow-info">
+                                <h4>AI Categorizes</h4>
+                                <p>Automatically sorted by type</p>
+                            </div>
+                        </div>
+                        <div class="workflow-arrow">
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="workflow-node">
+                            <div class="workflow-icon purple">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="workflow-info">
+                                <h4>Auto-Response Sent</h4>
+                                <p>Customer gets instant reply</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+        <div class="stats-container">
+            <div class="stat-card" data-count="150">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Businesses Served</div>
+            </div>
+            <div class="stat-card" data-count="5000">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Hours Saved Monthly</div>
+            </div>
+            <div class="stat-card" data-count="98">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Client Satisfaction %</div>
+            </div>
+            <div class="stat-card" data-count="24">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Hour Support</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-tag">
+                    <i class="fas fa-cogs"></i>
+                    Our Services
+                </span>
+                <h2 class="section-title text-gradient">Solutions for Every Need</h2>
+                <p class="section-subtitle">
+                    From quick PC repairs to comprehensive business automation, we have you covered with services designed for Hispanic small businesses.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon blue">
+                        <i class="fas fa-laptop-medical"></i>
+                    </div>
+                    <h3>PC Repair</h3>
+                    <p>Fast, reliable computer repair services for your business. Virus removal, hardware upgrades, and data recovery.</p>
+                    <div class="service-price">$79 - $99 <span>per service</span></div>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Same-day diagnostics</li>
+                        <li><i class="fas fa-check"></i> Virus & malware removal</li>
+                        <li><i class="fas fa-check"></i> Hardware upgrades</li>
+                        <li><i class="fas fa-check"></i> Data backup & recovery</li>
+                    </ul>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon orange">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>n8n Automation</h3>
+                    <p>Powerful workflow automation to streamline your business operations. Connect apps, automate tasks, and save time.</p>
+                    <div class="service-price">$350 - $500 <span>setup + $199-249/mo</span></div>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Email automation</li>
+                        <li><i class="fas fa-check"></i> CRM integration</li>
+                        <li><i class="fas fa-check"></i> Lead nurturing workflows</li>
+                        <li><i class="fas fa-check"></i> Custom integrations</li>
+                    </ul>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon purple">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Monthly Maintenance</h3>
+                    <p>Proactive IT support to keep your technology running smoothly. Regular updates, backups, and priority support.</p>
+                    <div class="service-price">$149 <span>per month</span></div>
+                    <ul class="service-features">
+                        <li><i class="fas fa-check"></i> Weekly system checks</li>
+                        <li><i class="fas fa-check"></i> Priority support</li>
+                        <li><i class="fas fa-check"></i> Security updates</li>
+                        <li><i class="fas fa-check"></i> Cloud backup setup</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-tag">
+                    <i class="fas fa-route"></i>
+                    How It Works
+                </span>
+                <h2 class="section-title text-gradient">Your Journey to Automation</h2>
+                <p class="section-subtitle">
+                    Simple, transparent process from consultation to deployment.
+                </p>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-card reveal">
+                    <div class="process-number">1</div>
+                    <h3>Free Consultation</h3>
+                    <p>We discuss your business needs and identify automation opportunities.</p>
+                </div>
+                <div class="process-card reveal">
+                    <div class="process-number">2</div>
+                    <h3>Custom Strategy</h3>
+                    <p>We design a tailored automation plan that fits your budget and goals.</p>
+                </div>
+                <div class="process-card reveal">
+                    <div class="process-number">3</div>
+                    <h3>Build & Test</h3>
+                    <p>We build your automation workflows using n8n and thoroughly test everything.</p>
+                </div>
+                <div class="process-card reveal">
+                    <div class="process-number">4</div>
+                    <h3>Launch & Support</h3>
+                    <p>We deploy your solution and provide ongoing support and optimization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-tag">
+                    <i class="fas fa-briefcase"></i>
+                    Case Studies
+                </span>
+                <h2 class="section-title text-gradient">Success Stories</h2>
+                <p class="section-subtitle">
+                    See how we've helped Hispanic businesses in NYC and Long Island transform their operations.
+                </p>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-image">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Restaurant</span>
+                        <h3>La Cocina Mexicana</h3>
+                        <p>Automated reservation system and inventory management saved 20 hours weekly and reduced food waste by 30%.</p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <div class="portfolio-stat-value">20h</div>
+                                <div class="portfolio-stat-label">Hours Saved/Week</div>
+                            </div>
+                            <div class="portfolio-stat">
+                                <div class="portfolio-stat-value">30%</div>
+                                <div class="portfolio-stat-label">Waste Reduced</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-image">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Travel Agency</span>
+                        <h3>Sol Travel</h3>
+                        <p>Automated lead follow-up and booking confirmations increased conversion rates by 45% and saved 15 hours weekly.</p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <div class="portfolio-stat-value">45%</div>
+                                <div class="portfolio-stat-label">More Bookings</div>
+                            </div>
+                            <div class="portfolio-stat">
+                                <div class="portfolio-stat-value">15h</div>
+                                <div class="portfolio-stat-label">Automated/Week</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-image">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Retail</span>
+                        <h3>Bodega Central</h3>
+                        <p>Integrated POS, inventory, and accounting systems with automated reordering. Reduced out-of-stock by 80%.</p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <div class="portfolio-stat-value">80%</div>
+                                <div class="portfolio-stat-label">Stock Issues Fixed</div>
+                            </div>
+                            <div class="portfolio-stat">
+                                <div class="portfolio-stat-value">$12K</div>
+                                <div class="portfolio-stat-label">Saved/Year</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-card reveal">
+                    <div class="portfolio-image">
+                        <i class="fas fa-spa"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <span class="portfolio-tag">Salon</span>
+                        <h3>Estilo Latino</h3>
+                        <p>Automated appointment scheduling and reminders reduced no-shows by 60% and freed up 10 hours of admin work weekly.</p>
+                        <div class="portfolio-stats">
+                            <div class="portfolio-stat">
+                                <div class="portfolio-stat-value">60%</div>
+                                <div class="portfolio-stat-label">Fewer No-shows</div>
+                            </div>
+                            <div class="portfolio-stat">
+                                <div class="portfolio-stat-value">10h</div>
+                                <div class="portfolio-stat-label">Admin Time Saved</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-tag">
+                    <i class="fas fa-comments"></i>
+                    Testimonials
+                </span>
+                <h2 class="section-title text-gradient">What Our Clients Say</h2>
+                <p class="section-subtitle">
+                    Hear from Hispanic business owners who transformed their operations with CELC Systems.
+                </p>
+            </div>
+
+            <div class="testimonials-container">
+                <div class="testimonial-slider">
+                    <div class="testimonial-track" id="testimonialTrack">
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p class="testimonial-quote">
+                                    <i class="fas fa-quote-left"></i>
+                                    CELC Systems transformed how we handle reservations. The automation pays for itself every month, and their bilingual support made everything so easy to understand.
+                                    <i class="fas fa-quote-right"></i>
+                                </p>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-avatar">MR</div>
+                                    <div class="testimonial-info">
+                                        <h4>Maria Rodriguez</h4>
+                                        <p>Owner, La Cocina Mexicana</p>
+                                    </div>
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p class="testimonial-quote">
+                                    <i class="fas fa-quote-left"></i>
+                                    They set up our entire lead management system in n8n. Now we never miss a potential customer, and we're closing 45% more deals. Highly recommend!
+                                    <i class="fas fa-quote-right"></i>
+                                </p>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-avatar">CG</div>
+                                    <div class="testimonial-info">
+                                        <h4>Carlos Garcia</h4>
+                                        <p>CEO, Sol Travel Agency</p>
+                                    </div>
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="testimonial-card">
+                            <div class="testimonial-content">
+                                <p class="testimonial-quote">
+                                    <i class="fas fa-quote-left"></i>
+                                    Best IT service I've ever used. They fixed our computers in hours when others quoted days, and their monthly maintenance keeps us running smoothly.
+                                    <i class="fas fa-quote-right"></i>
+                                </p>
+                                <div class="testimonial-author">
+                                    <div class="testimonial-avatar">JP</div>
+                                    <div class="testimonial-info">
+                                        <h4>Juan Perez</h4>
+                                        <p>Manager, Bodega Central</p>
+                                    </div>
+                                </div>
+                                <div class="testimonial-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-controls">
+                    <button class="testimonial-btn" id="prevBtn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="testimonial-btn" id="nextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="testimonial-dots" id="testimonialDots">
+                    <div class="testimonial-dot active" data-index="0"></div>
+                    <div class="testimonial-dot" data-index="1"></div>
+                    <div class="testimonial-dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Calculator Section -->
+    <section class="pricing" id="pricing">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-tag">
+                    <i class="fas fa-calculator"></i>
+                    Pricing Calculator
+                </span>
+                <h2 class="section-title text-gradient">Estimate Your Investment</h2>
+                <p class="section-subtitle">
+                    Select the services you need and get an instant estimate.
+                </p>
+            </div>
+
+            <div class="pricing-calculator reveal">
+                <h3 class="calculator-title">Build Your Package</h3>
+                
+                <div class="calculator-options">
+                    <div class="calculator-option" data-price="89" data-type="pc-repair">
+                        <i class="fas fa-laptop-medical"></i>
+                        <h4>PC Repair</h4>
+                        <p>One-time service</p>
+                    </div>
+                    <div class="calculator-option selected" data-price="425" data-monthly="224" data-type="automation">
+                        <i class="fas fa-sync-alt"></i>
+                        <h4>n8n Automation</h4>
+                        <p>+ Monthly maintenance</p>
+                    </div>
+                    <div class="calculator-option" data-price="149" data-monthly="149" data-type="maintenance">
+                        <i class="fas fa-tools"></i>
+                        <h4>Monthly IT Support</h4>
+                        <p>Recurring service</p>
+                    </div>
+                </div>
+
+                <div class="calculator-result">
+                    <div class="price-display">
+                        $<span id="priceValue">425</span>
+                        <span id="pricePeriod">setup + $224/mo</span>
+                    </div>
+                    <button class="btn btn-primary btn-large mt-4" style="margin-top: 1.5rem;">
+                        <i class="fas fa-calendar-check"></i>
+                        Schedule Free Consultation
+                    </button>
+                    <div class="price-breakdown">
+                        <div class="price-item">
+                            <span>Setup Fee:</span>
+                            <span id="setupFee">$425</span>
+                        </div>
+                        <div class="price-item">
+                            <span>Monthly Cost:</span>
+                            <span id="monthlyFee">$224</span>
+                        </div>
+                        <div class="price-item" style="font-weight: 600; color: var(--primary);">
+                            <span>Annual Savings Estimate:</span>
+                            <span id="annualSavings">~$5,000+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison Section -->
+    <section class="comparison" id="comparison">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-tag" style="background: rgba(255,255,255,0.2); color: white;">
+                    <i class="fas fa-balance-scale"></i>
+                    Comparación
+                </span>
+                <h2 class="section-title" style="color: white;">¿Por qué pagar más?</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">
+                    Comparación de precios en el mercado NYC. Calidad profesional sin sobreprecios.
+                </p>
+            </div>
+
+            <div class="comparison-grid">
+                <!-- Competidor 1: Geek Squad -->
+                <div class="comparison-card reveal">
+                    <div class="competitor-logo">Geek Squad</div>
+                    <div class="price-note">Tiendas grandes</div>
+                    <div class="competitor-price">
+                        $149<span>/servicio</span>
+                    </div>
+                    <p class="price-note">Formateo + instalación básica</p>
+                    <ul class="comparison-features">
+                        <li class="negative"><i class="fas fa-times"></i> Sin backup de datos</li>
+                        <li class="negative"><i class="fas fa-times"></i> Solo inglés</li>
+                        <li class="negative"><i class="fas fa-times"></i> Sin automatización</li>
+                        <li class="positive"><i class="fas fa-check"></i> Marca reconocida</li>
+                        <li class="negative"><i class="fas fa-times"></i> Sin seguimiento</li>
+                    </ul>
+                </div>
+
+                <!-- Competidor 2: Freelancer Fiverr -->
+                <div class="comparison-card reveal">
+                    <div class="competitor-logo">Freelancer Genérico</div>
+                    <div class="price-note">Plataformas freelance</div>
+                    <div class="competitor-price">
+                        $200<span>/proyecto</span>
+                    </div>
+                    <p class="price-note">Nivel básico en Fiverr</p>
+                    <ul class="comparison-features">
+                        <li class="negative"><i class="fas fa-times"></i> Calidad variable</li>
+                        <li class="negative"><i class="fas fa-times"></i> Comunicación difícil</li>
+                        <li class="negative"><i class="fas fa-times"></i> Sin garantía</li>
+                        <li class="positive"><i class="fas fa-check"></i> Precio bajo</li>
+                        <li class="negative"><i class="fas fa-times"></i> Proyecto puntual</li>
+                    </ul>
+                </div>
+
+                <!-- CELC Systems (Nosotros) -->
+                <div class="comparison-card celecs reveal">
+                    <div class="competitor-logo" style="color: var(--accent);">
+                        <i class="fas fa-star"></i> CELC Systems
+                    </div>
+                    <div class="price-note">Tu aliado local</div>
+                    <div class="competitor-price" style="color: var(--accent);">
+                        $89<span>/PC Repair</span>
+                    </div>
+                    <p class="price-note" style="color: rgba(255,255,255,0.8);">o $224/mo automatización</p>
+                    <ul class="comparison-features">
+                        <li class="positive"><i class="fas fa-check"></i> Atención en español</li>
+                        <li class="positive"><i class="fas fa-check"></i> Backup incluido</li>
+                        <li class="positive"><i class="fas fa-check"></i> N8n automation expert</li>
+                        <li class="positive"><i class="fas fa-check"></i> Soporte local NYC/LI</li>
+                        <li class="positive"><i class="fas fa-check"></i> Relación continua</li>
+                    </ul>
+                    <span class="savings-badge">Ahorra 30-50%</span>
+                </div>
+
+                <!-- Competidor 4: Agencia IT -->
+                <div class="comparison-card reveal">
+                    <div class="competitor-logo">Agencia IT</div>
+                    <div class="price-note">Empresas grandes</div>
+                    <div class="competitor-price">
+                        $500<span>/hora</span>
+                    </div>
+                    <p class="price-note">Consultoría empresarial</p>
+                    <ul class="comparison-features">
+                        <li class="positive"><i class="fas fa-check"></i> Servicio profesional</li>
+                        <li class="negative"><i class="fas fa-times"></i> Cobertura excesiva</li>
+                        <li class="negative"><i class="fas fa-times"></i> Contratos largos</li>
+                        <li class="negative"><i class="fas fa-times"></i> No para PYMES</li>
+                        <li class="negative"><i class="fas fa-times"></i> Soporte impersonnal</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="contact" class="btn btn-primary btn-large" style="background: var(--accent); border-color: var(--accent);">
+                    <i class="fas fa-calculator"></i>
+                    Ver mi cotización personalizada
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog" id="blog">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-tag">
+                    <i class="fas fa-blog"></i>
+                    Blog
+                </span>
+                <h2 class="section-title text-gradient">Tecnología para tu Negocio</h2>
+                <p class="section-subtitle">
+                    Tips, guías y casos de éxito para optimizar tu negocio con tecnología.
+                </p>
+            </div>
+
+            <div class="blog-grid">
+                <!-- Post 1 -->
+                <article class="blog-card reveal">
+                    <div class="blog-image">
+                        <span class="blog-category">Automatización</span>
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Abr 7, 2026</span>
+                            <span><i class="fas fa-clock"></i> 5 min</span>
+                        </div>
+                        <h3 class="blog-title">5 Señales de que tu Negocio Necesita Automatización YA</h3>
+                        <p class="blog-excerpt">Descubre si estás perdiendo tiempo y dinero en tareas que podrían estar automatizadas. Identifica las señales de alerta en tu operación diaria.</p>
+                        <a href="#" class="blog-link">
+                            Leer más <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post 2 -->
+                <article class="blog-card reveal">
+                    <div class="blog-image">
+                        <span class="blog-category">Case Study</span>
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Mar 28, 2026</span>
+                            <span><i class="fas fa-clock"></i> 4 min</span>
+                        </div>
+                        <h3 class="blog-title">Caso JM Travel: Cómo Ahorrar 15 Horas Semanales</h3>
+                        <p class="blog-excerpt">Descubre cómo una agencia de viajes en Hicksville transformó su operación con n8n, automatizando seguimientos y confirmaciones.</p>
+                        <a href="#" class="blog-link">
+                            Leer más <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Post 3 -->
+                <article class="blog-card reveal">
+                    <div class="blog-image">
+                        <span class="blog-category">Guía</span>
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span><i class="fas fa-calendar"></i> Mar 15, 2026</span>
+                            <span><i class="fas fa-clock"></i> 6 min</span>
+                        </div>
+                        <h3 class="blog-title">Automatización para Restaurantes: Reservas y Pedidos</h3>
+                        <p class="blog-excerpt">Guía completa para implementar un sistema automático de reservas, pedidos online y gestión de inventario en tu restaurante.</p>
+                        <a href="#" class="blog-link">
+                            Leer más <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <div class="blog-cta reveal">
+                <a href="#" class="btn btn-secondary">
+                    <i class="fas fa-newspaper"></i>
+                    Ver todos los artículos
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <span class="section-tag">
+                    <i class="fas fa-envelope"></i>
+                    Contact Us
+                </span>
+                <h2 class="section-title text-gradient">Let's Start Your Project</h2>
+                <p class="section-subtitle">
+                    Ready to automate your business? Get in touch for a free consultation.
+                </p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-card reveal">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p>(516) 555-0199</p>
+                        </div>
+                    </div>
+                    <div class="contact-card reveal">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p>info@celcsystems.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-card reveal">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Location</h4>
+                            <p>NYC & Long Island, NY</p>
+                        </div>
+                    </div>
+                    <div class="contact-card reveal">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h4>Hours</h4>
+                            <p>Mon-Fri: 8AM - 6PM<br>24/7 Emergency Support</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper reveal">
+                    <form id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="businessType">Business Type</label>
+                            <select id="businessType" name="businessType">
+                                <option value="">Select your business type</option>
+                                <option value="restaurant">Restaurant / Food</option>
+                                <option value="retail">Retail / Store</option>
+                                <option value="service">Service Business</option>
+                                <option value="travel">Travel Agency</option>
+                                <option value="salon">Salon / Spa</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="serviceInterest">Service Interest</label>
+                            <select id="serviceInterest" name="serviceInterest">
+                                <option value="">Select a service</option>
+                                <option value="pc-repair">PC Repair</option>
+                                <option value="automation">n8n Automation</option>
+                                <option value="maintenance">Monthly IT Support</option>
+                                <option value="consultation">General Consultation</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">C</div>
+                        <span class="logo-text">CELC Systems</span>
+                    </a>
+                    <p>Professional IT and automation services designed specifically for small Hispanic businesses in NYC and Long Island. Technology that works for you.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="#services">PC Repair</a></li>
+                        <li><a href="#services">n8n Automation</a></li>
+                        <li><a href="#services">Monthly Maintenance</a></li>
+                        <li><a href="#services">IT Consulting</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#process">How It Works</a></li>
+                        <li><a href="#portfolio">Case Studies</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#contact">Get Support</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 CELC Systems. All rights reserved.</p>
+                <div class="language-selector">
+                    <i class="fas fa-globe"></i>
+                    <span>English / Español</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <span id="toastMessage"></span>
+    </div>
+
+    <script>
+        // Register GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        const icon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            html.setAttribute('data-theme', newTheme);
+            icon.className = newTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+        icon.className = savedTheme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Typing Effect
+        const words = ['Simplifica Tu Negocio', 'Automatiza Procesos', 'Ahorra Tiempo', 'Crece Más Rápido'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typingText = document.getElementById('typingText');
+
+        function type() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typingText.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                isDeleting = true;
+                setTimeout(type, 2000);
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                setTimeout(type, 500);
+            } else {
+                setTimeout(type, isDeleting ? 50 : 100);
+            }
+        }
+
+        type();
+
+        // Stats Counter Animation
+        const statCards = document.querySelectorAll('.stat-card');
+        
+        const animateCounter = (card) => {
+            const counter = card.querySelector('.stat-number');
+            const target = parseInt(card.dataset.count);
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += step;
+                if (current < target) {
+                    counter.textContent = Math.floor(current).toLocaleString() + (card.dataset.count === '98' ? '%' : (card.dataset.count === '24' ? '/7' : '+'));
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counter.textContent = target.toLocaleString() + (card.dataset.count === '98' ? '%' : (card.dataset.count === '24' ? '/7' : '+'));
+                }
+            };
+
+            updateCounter();
+        };
+
+        // Stats intersection observer
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statCards.forEach(card => statsObserver.observe(card));
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // GSAP Animations
+        gsap.from('.hero-mockup', {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            delay: 0.3
+        });
+
+        gsap.from('.service-card', {
+            scrollTrigger: {
+                trigger: '.services-grid',
+                start: 'top 80%'
+            },
+            duration: 0.8,
+            y: 60,
+            opacity: 0,
+            stagger: 0.2,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.process-card', {
+            scrollTrigger: {
+                trigger: '.process-grid',
+                start: 'top 80%'
+            },
+            duration: 0.8,
+            y: 60,
+            opacity: 0,
+            stagger: 0.15,
+            ease: 'power3.out'
+        });
+
+        gsap.from('.portfolio-card', {
+            scrollTrigger: {
+                trigger: '.portfolio-grid',
+                start: 'top 80%'
+            },
+            duration: 0.8,
+            y: 60,
+            opacity: 0,
+            stagger: 0.2,
+            ease: 'power3.out'
+        });
+
+        // Testimonial Slider
+        let currentSlide = 0;
+        const testimonialTrack = document.getElementById('testimonialTrack');
+        const testimonialDots = document.querySelectorAll('.testimonial-dot');
+        const totalSlides = 3;
+
+        function goToSlide(index) {
+            currentSlide = index;
+            testimonialTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            testimonialDots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        document.getElementById('prevBtn').addEventListener('click', () => {
+            goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', () => {
+            goToSlide((currentSlide + 1) % totalSlides);
+        });
+
+        testimonialDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => goToSlide(index));
+        });
+
+        // Auto-advance testimonials
+        setInterval(() => {
+            goToSlide((currentSlide + 1) % totalSlides);
+        }, 6000);
+
+        // Pricing Calculator - FUNCIONAL
+        const calculatorOptions = document.querySelectorAll('.calculator-option');
+        const priceValue = document.getElementById('priceValue');
+        const pricePeriod = document.getElementById('pricePeriod');
+        const setupFee = document.getElementById('setupFee');
+        const monthlyFee = document.getElementById('monthlyFee');
+        const annualSavings = document.getElementById('annualSavings');
+
+        function updateCalculator(option) {
+            const price = option.dataset.price;
+            const monthly = option.dataset.monthly;
+            
+            // Animar cambio de precio
+            priceValue.style.opacity = '0';
+            setTimeout(() => {
+                priceValue.textContent = price;
+                priceValue.style.opacity = '1';
+            }, 200);
+            
+            if (monthly && monthly !== '0') {
+                pricePeriod.textContent = 'setup + $' + monthly + '/mo';
+                setupFee.textContent = '$' + price;
+                monthlyFee.textContent = '$' + monthly;
+                // Calcular ahorro anual estimado (ejemplo: automatización ahorra ~$5K/año)
+                const monthlyNum = parseInt(monthly);
+                const estimatedSavings = monthlyNum * 12 * 2; // simplificando
+                annualSavings.textContent = '~$' + estimatedSavings.toLocaleString() + '+';
+            } else {
+                pricePeriod.textContent = 'one-time';
+                setupFee.textContent = '$' + price;
+                monthlyFee.textContent = '$0';
+                annualSavings.textContent = 'Based on package';
+            }
+        }
+
+        // Agregar event listeners a las opciones
+        calculatorOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                calculatorOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                updateCalculator(option);
+            });
+        });
+
+        // Inicializar con la opción seleccionada por defecto
+        const initialOption = document.querySelector('.calculator-option.selected') || calculatorOptions[0];
+        if (initialOption) {
+            updateCalculator(initialOption);
+        }
+
+        // Contact Form
+        const contactForm = document.getElementById('contactForm');
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toastMessage');
+
+        function showToast(message, type = 'success') {
+            toastMessage.textContent = message;
+            toast.className = 'toast show ' + type;
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        }
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Simulate form submission
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<div class="spinner"></div> Sending...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+                contactForm.reset();
+                showToast('Thank you! We will contact you within 24 hours.', 'success');
+            }, 1500);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle (basic implementation)
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        mobileMenuBtn.addEventListener('click', () => {
+            showToast('Mobile menu coming soon!', 'success');
+        });
+    </script>
+</body>
+</html>
